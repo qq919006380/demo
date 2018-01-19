@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			h1{
+				text-align: center;
+				font-size: 40px;
+			}
+			ul li {
+				list-style: none;
+				width: 600px;
+				height: 405px;
+				display: inline-block;
+				border:solid 1px;
+				background: url("img/sprites-cloud.png") no-repeat;
+				
+			}
+			
+			.cloud1 {
+				 background-position: 0 0;
+				
+			}
+			.cloud1:hover {
+				background-position: -600px 0;
+			}
+			.cloud2{
+				background-position: 0 -450px;
+			}
+			.cloud2:hover{
+				background-position: -600px -450px;
+			}
+			.cloud3{
+				background-position: 0 -900px;
+			}
+			.cloud3:hover{
+				background-position: -600px 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>css sprite</h1>
+		<ul>
+			<li class="cloud1"></li>
+			<li class="cloud2"></li>
+			<li class="cloud3"></li>
+		</ul>
+		
+		​
+	</body>
+
+</html>
