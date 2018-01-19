@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>iconfont</title>
+		<style type="text/css">
+			/*unicode方式引入*/
+			@font-face {
+				font-family: 'iconfont';
+				/* project id 548436 */
+				src: url('//at.alicdn.com/t/font_548436_ni0rvxwfuco3l3di.eot');
+				src: url('//at.alicdn.com/t/font_548436_ni0rvxwfuco3l3di.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_548436_ni0rvxwfuco3l3di.woff') format('woff'), url('//at.alicdn.com/t/font_548436_ni0rvxwfuco3l3di.ttf') format('truetype'), url('//at.alicdn.com/t/font_548436_ni0rvxwfuco3l3di.svg#iconfont') format('svg');
+			}
+			span {
+				font-family: iconfont;
+			}
+			/*symbol通用css代码（引入一次就行）*/
+			.icon {
+				width: 1em;
+				height: 1em;
+				vertical-align: -0.15em;
+				fill: currentColor;
+				overflow: hidden;
+				font-size: 50px/*设置图标大小*/
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_548436_ni0rvxwfuco3l3di.css"/><!--font-class引用-->
+		<script src="//at.alicdn.com/t/font_548400_zgkxqa2vetk5ipb9.js"></script> <!--symbol引用-->
+	</head>
+
+	<body>
+		<h1>iconfont 实现字体图标 demo</h1>
+		<h3>unicode引用</h3>
+		<ul>
+			<li>兼容性最好，支持ie6+，及所有现代浏览器。 <span>&#xe6ef;</span></li>
+			<li>支持按字体的方式去动态调整图标大小，颜色等等。<span>&#xe631;</span></li>
+			<li>但是因为是字体，所以不支持多色。只能使用平台里单色的图标，就算项目里有多色图标也会自动去色。<span>&#xe6ec;</span></li>
+			<li>HTML里面unicode码前面要加&#x</li>
+		</ul>
+		<h3>font-class引用</h3>
+		<p>font-class是unicode使用方式的一种变种，主要是解决unicode书写不直观，语意不明确的问题。</p>
+		<ul>
+			<li>兼容性良好，支持ie8+，及所有现代浏览器。<i class="iconfont icon-baoxue"></i></li>
+			<li>相比于unicode语意明确，书写更直观。可以很容易分辨这个icon是什么。<i class="iconfont icon-qing"></i></li>
+			<li>因为使用class来定义图标，所以当要替换图标时，只需要修改class里面的unicode引用。<i class="iconfont icon-tianqi"></i></li>
+			<li>不过因为本质上还是使用的字体，所以多色图标还是不支持的。<i class="iconfont icon-xue"></i></li>
+			<li>CSS里面unicode码前面要加\</li>
+		</ul>
+		<h3>彩色图标——symbol引用</h3>
+		<ul>
+			<li>支持多色图标了，不再受单色限制。</li>
+			<li>通过一些技巧，支持像字体那样，通过 font-size、color 来调整样式。</li>
+			<li>兼容性较差，支持 ie9+ 及现代浏览器。</li>
+			<li>浏览器渲染 svg 的性能一般，还不如 png。</li>
+		</ul>
+		<svg class="icon" aria-hidden="true">
+			<use xlink:href="#icon-emoji-1"></use>
+		</svg>
+		<svg class="icon" aria-hidden="true">
+			<use xlink:href="#icon-emoji-2"></use>
+		</svg>
+		<svg class="icon" aria-hidden="true">
+			<use xlink:href="#icon-emoji-3"></use>
+		</svg>
+		<svg class="icon" aria-hidden="true">
+			<use xlink:href="#icon-emoji-4"></use>
+		</svg>
+		<svg class="icon" aria-hidden="true">
+			<use xlink:href="#icon-emoji-7"></use>
+		</svg>
+	</body>
+</html>
