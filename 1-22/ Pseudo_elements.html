@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			input[type=checkbox] {
+				-webkit-appearance: none;
+				appearance: none;
+				background: url(http://7xpvnv.com2.z0.glb.qiniucdn.com/b6dcd011-23cc-4d95-9e51-9f10100103bd.png) 0 0 no-repeat;
+				display: inline-block;
+				width: 20px;
+				height: 20px;
+				background-size: contain;
+				vertical-align: middle;
+				outline: none;
+			}
+			
+			input[type=checkbox]:checked {
+				-webkit-appearance: none;
+				appearance: none;
+				background: url(http://7xpvnv.com2.z0.glb.qiniucdn.com/538f26f0-6f3e-48d5-91e6-5b5bb730dd19.png) 0 0 no-repeat;
+				display: inline-block;
+				width: 20px;
+				height: 20px;
+				background-size: contain;
+				vertical-align: middle;
+			}
+			.box{
+				width: 200px;
+				height: 100px;
+				border: 1px solid rgb(207,207,207);
+				margin: 30px;
+				position: relative;
+				background: #fff;
+			}
+			
+			.box:nth-child(1)::after{
+				content: "";
+				width: 0px;
+				height: 0px;
+				border-top: 10px solid transparent;
+				border-right: 10px solid transparent;
+				border-bottom: 10px solid rgb(136,136,136);
+				border-left: 10px solid rgb(136,136,136);
+				transform: rotateZ(135deg);
+				position: absolute;
+				top: -10px;
+				left: 10px;
+			}
+			.box:nth-child(2)::after{
+				content: "";
+				width: 0px;
+				height: 0px;
+				border-top: 10px solid transparent;
+				border-right: 10px solid transparent;
+				border-bottom: 10px solid red;
+				border-left: 10px solid red;
+				transform: rotateZ(180deg);
+				position: absolute;
+				top: -1px;
+				left: 180px;
+			}
+			.box:nth-child(3)::after{
+				content: "";
+				width: 15px;
+				height: 15px;
+				/*border-top: 10px solid transparent;
+				border-right: 10px solid transparent;*/
+				border-bottom: 1px solid rgb(207,207,207);
+				border-left: 1px solid rgb(207,207,207);
+				transform: rotateZ(135deg);
+				background: #fff;
+				position: absolute;
+				top: -9px;
+				left: 10px;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		今天的心情: <input type="checkbox">
+		
+	</body>
+
+</html>
