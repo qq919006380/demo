@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_594996_x6nunhsyjb3s1yvi.css"/>
+	<style type="text/css">
+		header{
+			position: absolute;
+			top: 10px;
+			right: 10px;
+		}
+		header .icon-login{
+			font-size: 24px;
+		}
+		main{
+			background:linear-gradient(to right top, rgba(38,50,105,0.78), rgba(255,152,0,0.45)), url(imgs/bg.jpg);
+			background-size: cover;
+			background-position: center center;
+		}
+		.flip-modal{
+			display: none;
+		}
+		.modal{
+			width: 400px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%,-50%) rotateY(0deg);
+			transition:all 1s;
+			background: #fff;
+			padding: 16px;
+		}
+		.modal .close{
+			position: absolute;
+			top:0;
+			right: 10px;
+		}
+		.modal .close .icon-close{
+			font-size: 28px;
+		}
+		.modal .tabs{
+			text-align: center;
+			font-size: 16px;
+			color: #666;
+		}
+		.modal .tabs>a{
+			display: inline-block;
+			margin: 0 15px;
+		}
+		.modal .tabs .login.underline,
+		.modal .tabs .registered.underline{
+			border-bottom: 2px solid;
+			
+		}
+		.modal .content{
+			padding: 10px 40px;
+		}
+		.modal .errormsg {
+     		color: #ff9800;
+     		font-size: 12px;
+    	}
+		.modal .input-box{
+			margin-top: 20px;
+			position: relative;
+		}
+		.modal .input-box i{
+			position: absolute;
+			top: 7px;
+			left: 4px;
+		}
+		.modal .username,.modal .password{
+			width: 100%;
+			outline: none;
+			padding: 10px 10px 10px 20px;
+		}
+		.modal .submit{
+			padding: 6px 10px;
+			background: #fff;
+			border: none;
+			box-shadow: 0px 0px 2px rgba(0,0,0,0.4);
+			outline: none;
+		}
+		.flip-modal.login .modal-login,
+		.flip-modal.registered .modal-registered{
+			transform: translate(-50%,-50%) rotateY(0deg);
+			backface-visibility: hidden;
+		}
+		.flip-modal.login .modal-registered,
+		.flip-modal.registered .modal-login{
+			transform: translate(-50%,-50%) rotateY(180deg);
+			backface-visibility: hidden;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<a class="login" href="#"><i class="iconfont icon-login"></i></a>
+	</header>
+	<main>
+		<div class="flip-modal login">
+			<!--登录-->
+			<div class="modal modal-login">
+				<a class="close" href="#"><i class="iconfont icon-close"></i></a>
+				<div class="tabs">
+					<a class="login underline" href="#">登录</a>
+					<a class="registered" href="#">注册</a>
+				</div>
+				<div class="content">
+					<div class="errormsg"></div>
+					<form action="/login" method="post">
+						<div class="input-box"><i class="iconfont icon-login-username"></i><input type="text" name="username"class="username" placeholder="用户名" /></div>
+						<div class="input-box"><i class="iconfont icon-login-password"></i><input type="password" name="password" class="password" placeholder="输入密码"/></div>
+						<div class="input-box"><input type="submit" class="submit" value="登录" /></div>
+					</form>
+				</div>
+			</div>
+			<!--注册-->
+			<div class="modal modal-registered">
+				<a class="close" href="#"><i class="iconfont icon-close"></i></a>
+				<div class="tabs">
+					<a class="login" href="#">登录</a>
+					<a class="registered underline" href="#">注册</a>
+				</div>
+				<div class="content">
+					<div class="errormsg"></div>
+					<form action="/register" method="post">
+						<div class="input-box"><i class="iconfont icon-login-username"></i><input type="text" name="username"class="username" placeholder="用户名" /></div>
+						<div class="input-box"><i class="iconfont icon-login-password"></i><input type="password" name="password" class="password" placeholder="输入密码"/></div>
+						<div class="input-box"><i class="iconfont icon-login-password"></i><input type="password" name="password2" class="password" placeholder="再次输入密码"/></div>
+						<div class="input-box"><input type="submit" class="submit" value="注册" /></div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</main>
+	<script type="text/javascript">
+		function $(selector){
+			return document.querySelector(selector)
+		}
+		function $$(selector){
+			return document.querySelectorAll(selector)
+		}
+		$(".flip-modal").addEventListener("click",function(e){
+			e.stopPropagation()
+			console.log(1)
+			if(e.target.classList.contains("login")){
+				$(".flip-modal").classList.add("login")
+				$(".flip-modal").classList.remove("registered")
+			}
+			if(e.target.classList.contains("registered")){
+				$(".flip-modal").classList.add("registered")
+				$(".flip-modal").classList.remove("login")
+			}
+			if(e.target.classList.contains("icon-close")){
+				$('.flip-modal').style.display = 'none'
+			}
+		})
+		$('header .login').onclick = function(e){
+			e.stopPropagation()
+     		$('.flip-modal').style.display = 'block'
+    	}
+		document.addEventListener('click', function(e){
+			console.log("document")
+      		$('.flip-modal').style.display = 'none'
+    	})
+		
+		$('.modal-login form').addEventListener('submit', function(e){
+      e.preventDefault()
+      if(!/^\w{3,8}$/.test($('.modal-login input[name=username]').value)){
+        $('.modal-login .errormsg').innerText = '用户名需输入3-8个字符，包括字母数字下划线'
+        return false
+      }
+      if(!/^\w{6,10}$/.test($('.modal-login input[name=password]').value)){
+        $('.modal-login .errormsg').innerText = '密码需输入6-10个字符，包括字母数字下划线'
+        return false
+      }
+      this.submit()      
+    })
+
+    $('.modal-registered form').addEventListener('submit', function(e){
+      e.preventDefault()
+      if(!/^\w{3,8}$/.test($('.modal-registered input[name=username]').value)){
+        $('.modal-registered .errormsg').innerText = '用户名需输入3-8个字符，包括字母数字下划线'
+        return false
+      }
+      if(/^hunger$|^ruoyu$/.test($('.modal-registered input[name=username]').value)){
+        $('.modal-registered .errormsg').innerText = '用户名已存在'
+        return false
+      }
+      if(!/^\w{6,10}$/.test($('.modal-registered input[name=password]').value)){
+        $('.modal-registered .errormsg').innerText = '密码需输入6-10个字符，包括字母数字下划线'
+        return false
+      }
+      if($('.modal-registered input[name=password]').value !== $('.modal-registered input[name=password2]').value){
+        $('.modal-registered .errormsg').innerText = '两次输入的密码不一致'
+        return false
+      }
+      this.submit()      
+    })
+	</script>
+</body>
+</html>
