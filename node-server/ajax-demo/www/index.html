@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div class="container">
+			<ul class="new">
+			</ul>
+			<button class="changeBtn">换一组</button>
+		</div>
+		<script type="text/javascript">
+			var newsUl = document.querySelector(".container .new")
+			var container = document.querySelector(".container")
+			var changeBtn = document.querySelector(".changeBtn")
+			getNews(function(news) {
+				renderNews(news)
+			})
+			changeBtn.onclick = function() {
+				getNews(function(news) {
+					renderNews(news)
+				})
+			}
+
+			function getNews(callback) {
+				var xhr = new XMLHttpRequest()
+				xhr.open('GET', "/getNews", true)
+				xhr.onload = function() {
+					var JSONnews = JSON.parse(xhr.responseText)
+					callback(JSONnews)
+				}
+				xhr.send()
+			}
+
+			function renderNews(news) {
+				newsUl.innerHTML = ""
+				var fragment = document.createDocumentFragment()
+				news.forEach(function(newsStr) {
+					var newLi = document.createElement("li")
+					newLi.innerText = newsStr
+					fragment.appendChild(newLi)
+				})
+				newsUl.appendChild(fragment)
+			}
+		</script>
+	</body>
+
+</html>

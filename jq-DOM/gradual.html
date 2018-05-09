@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<title>渐变轮播</title>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<style type="text/css">
+			.gradual_box {
+				width: 200px;
+				overflow: hidden;
+				margin: auto;
+				position: relative
+			}
+			
+			.gradual_box .gradual_list {
+				width: 600px;
+				padding: 0;
+				margin: 0;
+			}
+			
+			.gradual_box .img_item {
+				float: left;
+				display: none
+			}
+			
+			.gradual_box .img_item.active {
+				display: block;
+			}
+			
+			.gradual_box .pre {
+				padding: 0px 4px 2px 3px;
+				top: 40%;
+				left: 5%;
+				position: absolute;
+				border-radius: 50%;
+				border: solid 2px rgba(255, 255, 255, 1);
+				color: rgba(255, 255, 255, 1);
+			}
+			
+			.gradual_box .next {
+				padding: 0px 4px 2px 3px;
+				top: 40%;
+				left: 80%;
+				position: absolute;
+				border-radius: 50%;
+				border: solid 2px rgba(255, 255, 255, 1);
+				color: rgba(255, 255, 255, 1);
+			}
+			
+			.bullet {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, 480%);
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			
+			.bullet li {
+				width: 8px;
+				height: 8px;
+				background: rgba(255, 255, 255, 1);
+				border-radius: 50px;
+				margin: 4px;
+				float: left;
+			}
+			
+			.bullet li:first-child {
+				background: pink
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="gradual_box">
+			<ul class="gradual_list">
+				<li class="img_item active"><img src="https://picsum.photos/200/200/?image=1" alt=""></li>
+				<li class="img_item "><img src="https://picsum.photos/200/200/?image=2" alt=""></li>
+				<li class="img_item "><img src="https://picsum.photos/200/200/?image=3" alt=""></li>
+			</ul>
+			<div class="pre">
+				<</div>
+					<div class="next">></div>
+					<ul class="bullet">
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+			</div>
+			<script type="text/javascript">
+				var index = 0
+				$('.pre').on('click', function() {
+					index--
+					$('.gradual_box .img_item').removeClass('active')
+					$('.gradual_box .img_item').eq(index).addClass('active')
+
+					$('.bullet li').css('background', 'rgb(255,255,255)')
+					$('.bullet li').eq(index).css('background', 'pink')
+					if(index < 0) {
+						index = 2
+					}
+					console.log(index)
+				})
+				$('.next').on('click', function() {
+					index++
+					index = index % $('.gradual_box .img_item').length
+					$('.gradual_box .img_item').removeClass('active')
+					$('.gradual_box .img_item').eq(index).addClass('active')
+					$('.bullet li').css('background', 'rgb(255,255,255)')
+					$('.bullet li').eq(index).css('background', 'pink')
+					console.log(index)
+				})
+				$('.bullet li').on('click', function() {
+					index = $(this).index()
+					$('.gradual_box .img_item').removeClass('active')
+					$('.gradual_box .img_item').eq(index).addClass('active')
+					$('.bullet li').css('background', 'rgb(255,255,255)')
+					$('.bullet li').eq(index).css('background', 'pink')
+					console.log(index)
+				})
+			</script>
+	</body>
+
+</html>

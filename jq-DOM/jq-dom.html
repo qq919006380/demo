@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		body {
+			font: 12px/150% Arial, Verdana, "\5b8b\4f53";
+			color: #666;
+		}
+		
+		.container {
+			width: 800px;
+			margin: 0 auto;
+		}
+		
+		.btn {
+			padding: 10px 15px;
+			border: solid 1px #c81623;
+			border-radius: 3px;
+			background: rgb(255, 255, 255);
+			color: #c81623;
+			text-decoration: none;
+		}
+		
+		.list {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			margin-top: -20px;
+			margin-left: -20px;
+		}
+		
+		.list::after {
+			content: "";
+			clear: both;
+			display: block;
+		}
+		
+		.list>.item {
+			float: left;
+			border: solid 1px #eee;
+			padding: 10px 20px;
+			position: relative;
+		}
+		
+		.list>.item>.cover {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background: rgba(0, 0, 0, 0.2);
+			opacity: 0;
+		}
+		
+		.list>.item>.cover>.delete {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		
+		.list>.item>.prod-name {
+			color: #666;
+			font-size: 12px;
+		}
+		
+		.list>.item>.prod-price {
+			color: #c81623;
+		}
+		
+		.list>.item {
+			margin-left: 20px;
+			margin-top: 20px;
+		}
+		.list>.item.hover .cover{
+			opacity: 1;
+		}
+		.btn.add,
+		.btn.edit {
+			margin: 20px 20px 0 0;
+			display: inline-block;
+		}
+	</style>
+
+	<body>
+		<div class="container">
+			<h1>珠宝首饰</h1>
+			<ul class="list">
+				<li class="item"><img src="https://picsum.photos/200/200/?image=1" />
+					<div class="cover">
+						<a href="#" class="btn delete">删除</a>
+					</div>
+					<div class='prod-name'>臧美千足金</div>
+					<div class='prod-price'>￥1699.00</div>
+				</li>
+				<li class="item"><img src="https://picsum.photos/200/200/?image=2" />
+					<div class="cover">
+						<a href="#" class="btn delete">删除</a>
+					</div>
+					<div class='prod-name'>臧美千足金</div>
+					<div class='prod-price'>￥1699.00</div>
+				</li>
+				<li class="item"><img src="https://picsum.photos/200/200/?image=3" />
+					<div class="cover">
+						<a href="#" class="btn delete">删除</a>
+					</div>
+					<div class='prod-name'>臧美千足金</div>
+					<div class='prod-price'>￥1699.00</div>
+				</li>
+			</ul>
+			<a href="#" class="btn add">添加</a>
+			<a href="#" class="btn edit">编辑</a>
+		</div>
+		<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+		<script type="text/javascript">
+			function getProdHtml(prod) {
+				var html = `
+					<li class="item"><img src=${prod.img} />
+					<div class="cover">
+						<a href="#" class="btn delete">删除</a>
+					</div>
+					<div class='prod-name'>${prod.name}</div>
+					<div class='prod-price'>${prod.price}</div>
+					</li>
+				`
+				return html
+			}
+
+			function getData() {
+				var results = []
+				for(var i = 0; i < 3; i++) {
+					var rand = Math.floor(Math.random() * 100)
+					var product = {
+						img: '//picsum.photos/200/200/?image=' + rand,
+						name: '珂兰 黄金手 猴哥款',
+						price: '￥' + rand
+					}
+					results.push(product)
+				}
+
+				return results
+			}
+
+			$('.btn.add').on('click', function(e) {
+				e.preventDefault();
+				$('.item').removeClass('hover')
+				var products = getData()
+				$.each(products, function(idx, prod) {
+					var html = getProdHtml(prod)
+					$('.list').append(html)
+				})
+			})
+			
+			$('.btn.edit').on('click', function(e) {
+				e.preventDefault();
+				$('.item').toggleClass('hover')
+			})
+			$('.list').on('click', '.delete', function(e) {
+				e.preventDefault()
+				$(this).parents('.item').remove()
+			})
+		</script>
+	</body>
+
+</html>
