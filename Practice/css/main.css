@@ -112,6 +112,7 @@ main .container .box.fr .box-item{
 }
 main .container-2{
 	position: relative;
+	height: 500px;
 	margin-bottom: 220px;
 } 
 main .container-2 .absolu{
